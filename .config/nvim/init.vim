@@ -1,9 +1,13 @@
 call plug#begin()
 
+" Coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " VIM enhancements
 Plug 'justinmk/vim-sneak'
 
 " GUI enhancements
+Plug 'frazrepo/vim-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'andymass/vim-matchup'
 
@@ -11,6 +15,7 @@ Plug 'andymass/vim-matchup'
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
+Plug 'neovimhaskell/haskell-vim'
 
 call plug#end()
 
@@ -42,6 +47,9 @@ let g:sneak#s_next = 1
 " Always draw sign column. Prevent buffer moving when adding/deleting sign.
 set signcolumn=yes
 
+" Enable rainbow
+let g:rainbow_active = 1
+
 " Sane splits
 set splitright
 set splitbelow
@@ -50,11 +58,16 @@ set splitbelow
 set undodir=~/.vimdid
 set undofile
 
-" Use wide tabs
-set shiftwidth=8
-set softtabstop=8
-set tabstop=8
-set noexpandtab
+" Use medium tabs
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+" Display all white characters
+set list
+
+autocmd BufRead,BufNewFile *.c,*.h,*.cpp,*.hpp,*.hs set shiftwidth=2 softtabstop=2 tabstop=2
 
 " Proper search
 set incsearch
@@ -95,5 +108,15 @@ inoremap <right> <nop>
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
-" Language-specific
+" Rust-specific
 let g:rustfmt_autosave = 1
+autocmd Filetype rust set colorcolumn=100
+
+" Haskell-specific
+let g:haskell_enable_quantification = 1
+let g:haskell_enable_recursivedo = 1
+let g:haskell_enable_arrowsyntax = 1
+let g:haskell_enable_pattern_synonyms = 1
+let g:haskell_enable_typeroles = 1
+let g:haskell_enable_static_pointers = 1
+let g:haskell_backpack = 1

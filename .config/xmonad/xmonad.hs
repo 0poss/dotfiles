@@ -115,8 +115,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_l     ), spawn "xscreensaver-command -lock")
 
     -- increase/decrease brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +5")
-    , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -5")
+    , ((0, xF86XK_MonBrightnessUp), spawn "light -A 10")
+    , ((0, xF86XK_MonBrightnessDown), spawn "light -U 10")
     ]
     ++
 
