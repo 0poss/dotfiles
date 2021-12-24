@@ -15,7 +15,7 @@ Config { font = "xft:Terminus:style=Regular:pixelsize=11:antialias=true:hinting=
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [Run Network "wlp2s0" ["-L","0","-H","32",
+       , commands = [Run Network "wlan0" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
                     , Run Network "eth1" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
@@ -30,7 +30,7 @@ Config { font = "xft:Terminus:style=Regular:pixelsize=11:antialias=true:hinting=
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=haskell_20.xpm/> %cpu% | %memory% * %swap% | %wlp2s0% - %eth1% }\
+       , template = "<icon=haskell_20.xpm/> %cpu% | %memory% * %swap% | %wlan0% - %eth1% }\
                     \{ <fc=#ee9a00>%date%</fc>| %battery% | %uname%"
        }
 

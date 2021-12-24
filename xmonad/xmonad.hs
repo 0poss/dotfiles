@@ -12,6 +12,9 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
+-- Spacing between tiles
+import XMonad.Layout.Spacing
+
 import Graphics.X11.ExtraTypes.XF86
 
 
@@ -161,7 +164,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayoutHook = avoidStruts (tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
+     tiled   = spacing 5 $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
