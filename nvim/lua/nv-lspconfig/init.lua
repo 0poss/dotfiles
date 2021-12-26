@@ -10,6 +10,9 @@ cmp.setup({
 	mapping = {
 		['<Tab>'] = cmp.mapping.select_next_item(),
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+		['<C-n>'] = cmp.mapping.scroll_docs(4),
+		['<C-p>'] = cmp.mapping.scroll_docs(-4),
+		['<C-h>'] = cmp.mapping.close(),
 		['<enter>'] = cmp.mapping.confirm({ select = true }),
 	},
 	sources = cmp.config.sources({
@@ -52,6 +55,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>xx', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 	]]--
+	buf_set_keymap('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
 end
 

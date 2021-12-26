@@ -6,18 +6,24 @@ function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-local opt = {}
-
--- Ctrl+h to stop searching
-map('n', '<C-h>', ':nohlsearch<cr>', opt)
-map('v', '<C-h>', ':nohlsearch<cr>', opt)
+-- Ctrl+c to stop searching
+map('n', '<C-c>', ':nohlsearch<cr>', {})
 
 -- Very magic by default
-map('n', '?', '?\\v', opt)
-map('n', '/', '/\\v', opt)
+map('n', '?', '?\\v', {})
+map('n', '/', '/\\v', {})
 
 -- No arrow keys
-map('i', '<up>', '', opt)
-map('i', '<down>', '', opt)
-map('i', '<left>', '', opt)
-map('i', '<right>', '', opt)
+map('i', '<up>', '', {})
+map('i', '<down>', '', {})
+map('i', '<left>', '', {})
+map('i', '<right>', '', {})
+
+-- Create a session to the home directory
+map('n', '<C-s>', ':mksession! ~/Session.vim', {})
+
+-- Move between viewports
+map('n', '<C-k>', '<C-w>k', {})
+map('n', '<C-j>', '<C-w>j', {})
+map('n', '<C-h>', '<C-w>h', {})
+map('n', '<C-l>', '<C-w>l', {})

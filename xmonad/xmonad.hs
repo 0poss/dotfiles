@@ -117,9 +117,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Lock screen
     , ((modm .|. shiftMask, xK_l     ), spawn "xscreensaver-command -lock")
 
-    -- increase/decrease brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "light -A 10")
-    , ((0, xF86XK_MonBrightnessDown), spawn "light -U 10")
+    -- Increase/decrease brightness
+    , ((0, xF86XK_MonBrightnessUp	 ), spawn "light -A 10")
+    , ((0, xF86XK_MonBrightnessDown	 ), spawn "light -U 10")
+
+	-- Increase/decrease sound volume
+	, ((0, xF86XK_AudioLowerVolume   ), spawn "amixer set Master 2-")
+	, ((0, xF86XK_AudioRaiseVolume   ), spawn "amixer set Master 2+")
+	, ((0, xF86XK_AudioMute          ), spawn "amixer set Master toggle")
+
     ]
     ++
 

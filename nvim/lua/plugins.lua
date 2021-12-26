@@ -18,14 +18,23 @@ function()
 
 	-- Semantic language support
 	use 'neovim/nvim-lspconfig'
-	use 'hrsh7th/nvim-cmp' -- Autocompletion
+	-- Autocompletion
+	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-vsnip'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-buffer'
-	use 'simrat39/rust-tools.nvim' -- Rust
+	-- Rust
+	use 'simrat39/rust-tools.nvim'
+	use 'rust-lang/rust.vim'
 
 	-- Syntactic language support
 	use 'nvim-treesitter/nvim-treesitter'
+
+	-- Clang format
+	use 'rhysd/vim-clang-format'
+
+	-- Motion
+	use 'justinmk/vim-sneak'
 end
 )
