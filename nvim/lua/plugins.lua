@@ -34,7 +34,8 @@ function()
 	-- Clang format
 	use 'rhysd/vim-clang-format'
 
-	-- Motion
+	-- Vim enhancement
 	use 'justinmk/vim-sneak'
+	use 'preservim/nerdtree'
 end
 )

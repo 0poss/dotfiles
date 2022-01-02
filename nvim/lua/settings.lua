@@ -24,7 +24,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Number column and color column
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.colorcolumn = "80"
 vim.opt.showcmd = true -- Show (partial) command in status line.
