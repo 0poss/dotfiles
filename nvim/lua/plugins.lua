@@ -36,6 +36,5 @@ function()
 
 	-- Vim enhancement
 	use 'justinmk/vim-sneak'
-	use 'preservim/nerdtree'
 end
 )
