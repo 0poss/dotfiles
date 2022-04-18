@@ -34,4 +34,5 @@ vim.opt.mouse = "a"
 
 -- Theme
 vim.opt.termguicolors = true
-vim.cmd("colorscheme one")
+vim.g.material_style = "darker"
+vim.cmd "colorscheme material"

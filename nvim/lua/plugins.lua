@@ -15,6 +15,7 @@ function()
 
 	-- Theme
 	use 'rakr/vim-one'
+    use 'marko-cerovac/material.nvim'
 
 	-- Semantic language support
 	use 'neovim/nvim-lspconfig'
