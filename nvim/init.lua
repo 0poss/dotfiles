@@ -1,6 +1,6 @@
 require("settings")
-require("keybindings")
 require("plugins")
+require("keybindings")
 
 require("nv-lspconfig")
 require("nv-treesitter")
