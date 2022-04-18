@@ -13,10 +13,9 @@ vim.opt.undofile = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
-vim.opt.expandtab = false
-vim.api.nvim_command([[
-	au Filetype c,cpp set shiftwidth=2 softtabstop=2 tabstop=2 expandtab
-]])
+vim.opt.expandtab = true
+vim.api.nvim_command "au Filetype c,cpp,haskell set shiftwidth=2 softtabstop=2 tabstop=2 expandtab"
+
 
 -- Proper search
 vim.opt.incsearch = true
