@@ -83,7 +83,6 @@ nvim_lsp.rust_analyzer.setup {
 	capabilities = capabilities,
 }
 
-nvim_lsp["ccls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
+nvim_lsp.clangd.setup {
+    cmd = { "clangd", "-j=1", "--background-index", "--clang-tidy", "--completion-style=bundled" }
+};
