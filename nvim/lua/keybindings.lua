@@ -27,3 +27,7 @@ map('n', '<C-k>', '<C-w>k', {})
 map('n', '<C-j>', '<C-w>j', {})
 map('n', '<C-h>', '<C-w>h', {})
 map('n', '<C-l>', '<C-w>l', {})
+
+-- Set Copilot complete key to <C-Tab>
+vim.cmd 'imap <silent><script><expr> <C-l> copilot#Accept("\\<CR>")'
+vim.cmd 'let g:copilot_no_tab_map = v:true'

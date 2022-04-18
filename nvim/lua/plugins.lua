@@ -19,6 +19,7 @@ function()
 	-- Semantic language support
 	use 'neovim/nvim-lspconfig'
 	-- Autocompletion
+	use 'github/copilot.vim' -- GitHub copilot
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-vsnip'
