@@ -1,10 +1,10 @@
-Config { font = "xft:Terminus:style=Regular:pixelsize=11:antialias=true:hinting=true"
+Config { font = "xft:JetBrainsMono Nerd Font:style=Regular:pixelsize=11:antialias=true:hinting=true"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
-       , bgColor = "#282c34"
-       , fgColor = "#ff6c6b"
-       , alpha = 255
+       , bgColor = "#f8f8f8"
+       , fgColor = "#2a2b33"
+       , alpha = 180
        , position = TopSize C 100 24
        , textOffset = -1
        , iconOffset = -1
@@ -15,7 +15,7 @@ Config { font = "xft:Terminus:style=Regular:pixelsize=11:antialias=true:hinting=
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [Run Network "wlan0" ["-L","0","-H","32",
+       , commands = [Run Network "wlp2s0" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
                     , Run Network "eth1" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
@@ -26,11 +26,10 @@ Config { font = "xft:Terminus:style=Regular:pixelsize=11:antialias=true:hinting=
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
 		    , Run BatteryP ["BAT0"] ["-t", "<acstatus><watts> (<left>%)"] 360
-		    , Run UnsafeStdinReader
+		    , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=haskell_20.xpm/> %cpu% | %memory% * %swap% | %wlan0% - %eth1% }\
-                    \{ <fc=#ee9a00>%date%</fc>| %battery% | %uname%"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %wlp2s0% - %eth1% <fc=#ee9a00>%date%</fc>| %battery% | %uname%"
        }
 

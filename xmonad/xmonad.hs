@@ -11,6 +11,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.NoBorders
+import XMonad.Layout.VoidBorders
 
 -- Spacing between tiles
 import XMonad.Layout.Spacing
@@ -19,7 +22,7 @@ import Graphics.X11.ExtraTypes.XF86
 
 
 -- VARIABLES
-myTerminal      = "alacritty"
+myTerminal      = "kitty"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -213,7 +216,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging

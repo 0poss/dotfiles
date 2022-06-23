@@ -16,6 +16,7 @@ vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.api.nvim_command "au Filetype c,cpp,haskell set shiftwidth=2 softtabstop=2 tabstop=2 expandtab"
 
+vim.api.nvim_command "autocmd BufRead,BufNewFile *.sage set filetype=python"
 
 -- Proper search
 vim.opt.incsearch = true
@@ -33,5 +34,6 @@ vim.opt.mouse = "a"
 
 -- Theme
 vim.opt.termguicolors = true
-vim.g.material_style = "darker"
-vim.cmd "colorscheme material"
+vim.cmd "colorscheme one"
+vim.g.lightline = { colorscheme = 'one' }
+vim.cmd "set background=light"

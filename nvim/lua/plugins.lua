@@ -29,6 +29,8 @@ function()
 	-- Rust
 	use 'simrat39/rust-tools.nvim'
 	use 'rust-lang/rust.vim'
+    -- Coq
+    use 'whonore/Coqtail'
 
 	-- Syntactic language support
 	use 'nvim-treesitter/nvim-treesitter'

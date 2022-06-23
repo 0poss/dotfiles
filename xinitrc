@@ -1,1 +1,2 @@
+setxkbmap fr
 exec xmonad
