@@ -1,0 +1,25 @@
+prompt = '>  '
+padding = 100
+fonts = ['JetBrainsMono Nerd Font Mono']     # list of otf or ttf fonts. later elements work as fallback
+font_size = 32.0
+
+[history]
+decrease_interval = 48 # interval to decrease the number of launches
+
+[colors]
+background = '#282828aa'
+prompt = '#abb2bfff'
+text = '#eeffffff'          # for search results
+text_query = '#e5c07bff'    # for the search query
+text_selected = '#ea6962ff' # for the currently selected result
+
+[keybindings]
+# A list of available keys can be found here: https://docs.rs/crate/x11-keysymdef/0.2.0/source/src/keysym.json
+paste = ["ctrl+v"]
+execute = ["KP_Enter", "Return"]
+delete = ["KP_Delete", "Delete", "BackSpace"]
+delete_word = ["ctrl+KP_Delete", "ctrl+Delete", "ctrl+BackSpace"]
+complete = ["Tab"]
+nav_up = ["Up", "ctrl+p"]
+nav_down = ["Down", "ctrl+n"]
+exit = ["Escape"]

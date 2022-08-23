@@ -1,0 +1,60 @@
+[theme]
+theme = "slick"
+[icons]
+icons = "awesome6"
+
+[[block]]
+block = "cpu"
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 2
+warning = 4.0
+alert = 2.0
+format = "/: $used/$total"
+
+[[block]]
+block = "disk_space"
+path = "/home"
+info_type = "available"
+alert_unit = "GB"
+interval = 2
+warning = 100.0
+alert = 20.0
+format = "/home: $used/$total"
+
+[[block]]
+block = "disk_space"
+path = "/var"
+info_type = "available"
+alert_unit = "GB"
+interval = 2
+warning = 4.0
+alert = 2.0
+format = "/var: $used/$total"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "$mem_used/$mem_total ($mem_total_used_percents.eng(2))"
+format_swap = "$swap_used/$swap_total ($swap_used_percents.eng(2))"
+
+[[block]]
+block = "net"
+device = "enp5s0"
+format = "$device: $speed_down.eng(4) $speed_up.eng(4)"
+
+[[block]]
+block = "net"
+device = "wlan0"
+format = "$device: $speed_down.eng(4) $speed_up.eng(4)"
+
+[[block]]
+block = "time"
+interval = 5
+format = "%a %d/%m %R"
+[block.icons_overrides]
+time = ""
