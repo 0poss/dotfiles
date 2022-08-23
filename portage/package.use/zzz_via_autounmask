@@ -1,0 +1,10 @@
+# required by www-client/chromium-103.0.5060.134::gentoo
+# required by chromium (argument)
+>=sys-libs/zlib-1.2.12-r2 minizip
+# required by www-client/chromium-103.0.5060.134::gentoo
+# required by chromium (argument)
+>=net-libs/nodejs-18.6.0 inspector
+# required by x11-misc/xdg-utils-1.1.3_p20200220-r5::gentoo
+# required by www-client/chromium-103.0.5060.134::gentoo
+# required by chromium (argument)
+>=app-text/xmlto-0.0.28-r8 text
