@@ -12,7 +12,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(proof-locked-face ((t (:extend t :background "#228f36")))))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -21,6 +21,12 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(use-package avy
+  :ensure
+  :config)
+
+(global-set-key (kbd "M-s") 'avy-goto-char-2)
 
 (use-package lsp-mode
   :ensure
@@ -43,9 +49,23 @@
   (lsp-ui-doc-enable t))
 
 (use-package flycheck :ensure)
+
 (use-package tree-sitter :ensure)
 
+(use-package proof-general
+  :ensure
+  :config
+  (setq proof-splash-enable nil)
+  (setq overlay-arrow-string ""))
+
+(use-package company-coq
+  :ensure
+  :config
+  (add-hook 'coq-mode-hook #'company-coq-mode)
+  (setq company-coq-features/prettify-symbols-in-terminals t))
+
 (use-package yaml-mode :ensure)
+
 (use-package rustic
   :ensure
   :bind (:map rustic-mode-map
@@ -71,3 +91,20 @@
       `(("." . ,(getenv "XDG_RUNTIME_DIR"))))
 
 (xterm-mouse-mode 1)
+
+(global-hl-line-mode 1)
+(set-face-attribute hl-line-face nil :underline t)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+(defun gcm-scroll-down ()
+  (interactive)
+  (scroll-up 2))
+
+(defun gcm-scroll-up ()
+  (interactive)
+  (scroll-down 2))
+
+(global-set-key (kbd "C-<up>") 'gcm-scroll-up)
+(global-set-key (kbd "C-<down>") 'gcm-scroll-down)
+(global-set-key (kbd "<mouse-4>") 'gcm-scroll-up)
+(global-set-key (kbd "<mouse-5>") 'gcm-scroll-down)
