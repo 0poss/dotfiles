@@ -5,14 +5,21 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" default))
+ '(git-gutter:added-sign "+")
+ '(git-gutter:deleted-sign "-")
+ '(git-gutter:modified-sign "*")
  '(package-selected-packages
-   '(tree-sitter yasnippet use-package rustic lsp-ui flycheck doom-themes company centaur-tabs all-the-icons)))
+   '(git-gutter tree-sitter yasnippet use-package rustic lsp-ui flycheck doom-themes company centaur-tabs all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(proof-locked-face ((t (:extend t :background "#228f36")))))
+
+(setq visible-bell 1)
+
+(setq-default show-trailing-whitespace t)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -21,6 +28,11 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(use-package exec-path-from-shell
+  :ensure
+  :config
+  (exec-path-from-shell-copy-env "PATH"))
 
 (use-package avy
   :ensure
@@ -87,8 +99,26 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-gruvbox))
 
-(setq backup-directory-alist
-      `(("." . ,(getenv "XDG_RUNTIME_DIR"))))
+(use-package git-gutter
+  :ensure
+  :config
+  (global-git-gutter-mode t)
+  (custom-set-variables
+   '(git-gutter:modified-sign "*")
+   '(git-gutter:added-sign "+")
+   '(git-gutter:deleted-sign "-"))
+  )
+
+; Configure backups
+(setq
+   backup-by-copying t
+   backup-directory-alist
+    '(("" . "~/.saves/"))
+   delete-old-versions nil
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t
+   vc-make-backup-files t)
 
 (xterm-mouse-mode 1)
 

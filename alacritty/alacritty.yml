@@ -11,7 +11,7 @@ window:
 
   dynamic_padding: false
 
-  opacity: 0.5
+  opacity: 0.98
 
 scrolling:
   history: 10000
