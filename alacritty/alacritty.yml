@@ -1,8 +1,11 @@
-#import:
+-#import:
 #  - /path/to/alacritty.yml
 
 #env:
   #TERM: alacritty
+
+shell:
+  program: /usr/bin/zsh
 
 window:
   padding:
@@ -12,6 +15,7 @@ window:
   dynamic_padding: false
 
   opacity: 0.98
+  decorations: none
 
 scrolling:
   history: 10000
