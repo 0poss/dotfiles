@@ -72,7 +72,7 @@
   ("M-s M-w" . avy-goto-word-0)
   ("M-s q" . avy-goto-char-timer))
 
-;; Semantic language packages/configurations
+;;; Semantic language packages/configurations
 (use-package lsp-mode
   :ensure
   :bind-keymap
@@ -98,6 +98,20 @@
 (use-package flycheck
   :ensure)
 
+;; Coq
+(use-package proof-general
+  :ensure
+  :config
+  (setq proof-splash-enable nil
+	overlay-arrow-string ""))
+
+(use-package company-coq
+  :ensure
+  :init
+  (add-hook 'coq-mode-hook #'company-coq-mode)
+  :config
+  (setq company-coq-features/prettify-symbols-in-terminals t))
+
 ;; Rust
 (use-package rustic
   :ensure
@@ -114,15 +128,6 @@
 (use-package all-the-icons
   :ensure)
 
-(use-package centaur-tabs
-  :ensure
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward))
-
 ;;; Custom set variables
 
 (custom-set-variables
@@ -138,4 +143,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(proof-locked-face ((t (:extend t :background "#228f36")))))

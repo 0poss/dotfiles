@@ -42,7 +42,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Block
+    shape: Beam
 
     #   - Never: Prevent the cursor from ever blinking
     #   - Off: Disable blinking by default
