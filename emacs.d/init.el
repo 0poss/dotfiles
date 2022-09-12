@@ -25,6 +25,13 @@
 
 ;;; General settings
 
+;; Disable splash screen
+(setq inhibit-startup-message t) 
+(setq initial-scratch-message nil)
+
+;; Follow symlinks
+(setq vc-follow-symlinks t)
+
 (setq visible-bell t ;; Disable sound bell
       show-trailing-whitspace t ;; Show trailing whitespaces
       )
@@ -94,15 +101,27 @@
 ;; Rust
 (use-package rustic
   :ensure
-  :custom
-  (rustic-format-on-save t))
+  :config
+  (setq rustic-format-on-save t))
 
 ;;; Faces
 
 (use-package darcula-theme
-  :ensure t
+  :ensure
   :config
   (load-theme 'darcula t))
+
+(use-package all-the-icons
+  :ensure)
+
+(use-package centaur-tabs
+  :ensure
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
 
 ;;; Custom set variables
 
