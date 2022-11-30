@@ -1,5 +1,4 @@
-;;; Backups
-
+;;; Backups ;;;
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup/per-save"))
       backup-by-copying t
       make-backup-files t
@@ -23,18 +22,32 @@
 
 (add-hook 'before-save-hook  'force-backup-of-buffer)
 
-;;; General settings
 
+;;; General settings ;;;
 ;; Disable splash screen
-(setq inhibit-startup-message t) 
-(setq initial-scratch-message nil)
+(setq inhibit-startup-message t
+      initial-scratch-message nil)
 
-;; Follow symlinks
-(setq vc-follow-symlinks t)
-
-(setq visible-bell t ;; Disable sound bell
-      show-trailing-whitspace t ;; Show trailing whitespaces
+(setq-default vc-follow-symlinks t ;; Follow symlinks
+      visible-bell t ;; Disable sound bell
+      show-trailing-whitespace t ;; Show trailing whitespaces
       )
+
+;; Save history
+(use-package savehist
+  :init
+  (savehist-mode t))
+
+;; Normal selection by default
+(delete-selection-mode 1)
+
+;; Enable mouse
+(xterm-mouse-mode 1)
+(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+
+;; Disable menu-bar
+(menu-bar-mode -1)
 
 ;; Enable mouse
 (xterm-mouse-mode 1)
@@ -43,8 +56,8 @@
 (add-hook 'prog-mode-hook
 	  'display-line-numbers-mode)
 
-;;; Loading packages
 
+;;; Loading packages ;;;
 ;; MELPA
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -62,17 +75,70 @@
   :ensure
   :init (exec-path-from-shell-initialize))
 
-;; avy
+
+;;; Editor ;;;
+;; For minibuffer completion
+(use-package vertico
+  :ensure
+  :config
+  (vertico-mode t))
+
+;; For rich completion annotations
+(use-package marginalia
+  :ensure
+  :init
+  (marginalia-mode t))
+
+;; Display keybindings help
+(use-package which-key
+  :ensure
+  :config
+  (which-key-mode)
+  :custom
+  (which-key-idle-delay 0.75))
+
+(use-package multiple-cursors
+  :ensure
+  :bind
+  ("M-s l" . 'mc/edit-lines))
+
+;; For quick motion ; replacement for `vim-sneak'
 (use-package avy
   :ensure
   :bind
-  ("M-s s" . avy-goto-char)
-  ("M-s M-s" . avy-goto-char-2)
-  ("M-s w" . avy-goto-word-1)
-  ("M-s M-w" . avy-goto-word-0)
-  ("M-s q" . avy-goto-char-timer))
+  ("M-s M-s" . avy-goto-char-2))
 
-;;; Semantic language packages/configurations
+;; `orderless' completion style.
+(use-package orderless
+  :ensure
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package treemacs
+  :ensure
+  :bind
+  (:map global-map
+	("C-t" . treemacs)))
+
+(set-frame-font "Iosevka 11" nil t)
+
+(use-package gruvbox-theme
+  :ensure
+  :config
+  (load-theme 'gruvbox-dark-medium t))
+
+(use-package powerline
+  :ensure
+  :init
+  (powerline-default-theme))
+
+(use-package all-the-icons
+  :ensure)
+
+
+;;; Semantic language packages/configurations ;;;
 (use-package lsp-mode
   :ensure
   :bind-keymap
@@ -89,6 +155,9 @@
   (lsp-rust-analyzer-display-closure-return-type-hints t)
   (lsp-rust-analyzer-display-parameter-hints t))
 
+(use-package lsp-ui
+  :ensure)
+
 (use-package company
   :ensure
   :custom
@@ -97,6 +166,19 @@
 
 (use-package flycheck
   :ensure)
+
+(use-package yasnippet
+  :ensure
+  :config
+  (yas-global-mode))
+
+(use-package yasnippet-snippets
+  :ensure)
+
+;; Nix
+(use-package nix-mode
+  :ensure
+  :mode "\\.nix\\'")
 
 ;; Coq
 (use-package proof-general
@@ -118,29 +200,19 @@
   :config
   (setq rustic-format-on-save t))
 
-;;; Faces
-
-(use-package darcula-theme
-  :ensure
-  :config
-  (load-theme 'darcula t))
-
-(use-package all-the-icons
+;; C & co
+(use-package ccls
   :ensure)
-
-;;; Custom set variables
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("79586dc4eb374231af28bbc36ba0880ed8e270249b07f814b0e6555bdcb71fab" default))
- '(package-selected-packages '(exec-path-from-shell rustic use-package bind-key)))
+ '(package-selected-packages
+   '(multiple-cursors treemacs-icons-dired treemacs yasnippet-snippets which-key vertico use-package rustic proof-general powerline orderless nix-mode marginalia lsp-ui gruvbox-theme flycheck exec-path-from-shell darcula-theme company-coq ccls avy all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(proof-locked-face ((t (:extend t :background "#228f36")))))
+ )
