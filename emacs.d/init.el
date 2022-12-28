@@ -22,7 +22,6 @@
 
 (add-hook 'before-save-hook  'force-backup-of-buffer)
 
-
 ;;; General settings ;;;
 ;; Disable splash screen
 (setq inhibit-startup-message t
@@ -32,11 +31,6 @@
       visible-bell t ;; Disable sound bell
       show-trailing-whitespace t ;; Show trailing whitespaces
       )
-
-;; Save history
-(use-package savehist
-  :init
-  (savehist-mode t))
 
 ;; Normal selection by default
 (delete-selection-mode 1)
@@ -67,7 +61,8 @@
   (package-refresh-contents))
 
 ;; use-package
-(unless (package-installed-p '(use-package))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
   (package-install 'use-package))
 
 ;; Make sure to load the PATH from the shell
@@ -75,8 +70,37 @@
   :ensure
   :init (exec-path-from-shell-initialize))
 
+;; Straight
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Disable package.el in favor of straight.el
+(setq package-enable-at-startup nil)
 
 ;;; Editor ;;;
+;; Save history
+(use-package savehist
+  :init
+  (savehist-mode t))
+
+;; Copilot
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure
+  :hook (prog-mode . copilot-mode)
+  :bind
+  ("TAB" . 'copilot-accept-completion))
+
 ;; For minibuffer completion
 (use-package vertico
   :ensure
@@ -92,15 +116,16 @@
 ;; Display keybindings help
 (use-package which-key
   :ensure
-  :config
-  (which-key-mode)
+  :init
+  (which-key-mode t)
   :custom
   (which-key-idle-delay 0.75))
 
+;; Select ([C-RET]) then [M-s l] for multiple cursors
 (use-package multiple-cursors
   :ensure
   :bind
-  ("M-s l" . 'mc/edit-lines))
+  ("M-s l" . mc/edit-lines))
 
 ;; For quick motion ; replacement for `vim-sneak'
 (use-package avy
@@ -137,6 +162,10 @@
 (use-package all-the-icons
   :ensure)
 
+(use-package rainbow-delimiters
+  :ensure
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 ;;; Semantic language packages/configurations ;;;
 (use-package lsp-mode
@@ -203,13 +232,18 @@
 ;; C & co
 (use-package ccls
   :ensure)
+
+;; Haskell
+(use-package haskell-mode
+  :ensure)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(multiple-cursors treemacs-icons-dired treemacs yasnippet-snippets which-key vertico use-package rustic proof-general powerline orderless nix-mode marginalia lsp-ui gruvbox-theme flycheck exec-path-from-shell darcula-theme company-coq ccls avy all-the-icons)))
+   '(rainbow-delimiters haskell-mode multiple-cursors treemacs-icons-dired treemacs yasnippet-snippets which-key vertico use-package rustic proof-general powerline orderless nix-mode marginalia lsp-ui gruvbox-theme flycheck exec-path-from-shell darcula-theme company-coq ccls avy all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
