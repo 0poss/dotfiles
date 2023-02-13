@@ -65,30 +65,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Make sure to load the PATH from the shell
-;;(use-package exec-path-from-shell
-  ;;:ensure
-  ;;:init (exec-path-from-shell-initialize))
-
-;; Straight
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-;; Disable package.el in favor of straight.el
-(setq package-enable-at-startup nil)
-
-;;; Editor ;;;
-;; Org
+;;; Org
 (use-package org
   :ensure
   :mode (("\\.org$" . org-mode))
@@ -111,6 +88,14 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
+;;; Editor ;;;
+;; Consult
+(use-package consult
+  :ensure
+  :bind
+  ("C-x b" . consult-buffer)
+  ("C-x C-b" . switch-to-buffer))
+
 ;; Distraction-free screen
 (use-package olivetti
   :ensure
@@ -126,7 +111,7 @@
           (delete-other-windows)
           (text-scale-increase 2)
           (olivetti-mode t)
-	   (display-line-numbers-mode 0))
+	  (display-line-numbers-mode 0))
       (progn
         (jump-to-register 1)
         (olivetti-mode 0)
@@ -139,14 +124,6 @@
 (use-package savehist
   :init
   (savehist-mode t))
-
-;; Copilot
-(use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :ensure
-  :hook (prog-mode . copilot-mode)
-  :bind
-  ("TAB" . 'copilot-accept-completion))
 
 ;; For minibuffer completion
 (use-package vertico
@@ -179,6 +156,10 @@
   :ensure
   :bind
   ("M-s M-s" . avy-goto-char-2))
+
+;; Git
+(use-package magit
+  :ensure)
 
 ;; `orderless' completion style.
 (use-package orderless
@@ -291,12 +272,6 @@
   :config
   (setq company-coq-features/prettify-symbols-in-terminals t))
 
-;; Rust
-(use-package rustic
-  :ensure
-  :config
-  (setq rustic-format-on-save t))
-
 ;; C & co
 (use-package ccls
   :ensure)
@@ -305,14 +280,17 @@
 (use-package haskell-mode
   :ensure)
 
+;; Rust
+(use-package rustic
+  :ensure
+  :config
+  (setq rustic-format-on-save nil))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-babel-C++-compiler "clang++")
- '(org-babel-C-compiler "clang")
- '(org-babel-load-languages '((C . t) (emacs-lisp . t)))
  '(package-selected-packages
-   '(rainbow-delimiters haskell-mode multiple-cursors treemacs-icons-dired treemacs yasnippet-snippets which-key vertico use-package rustic proof-general powerline orderless nix-mode marginalia lsp-ui gruvbox-theme flycheck exec-path-from-shell darcula-theme company-coq ccls avy all-the-icons)))
+   '(consult haskell-mode ccls company-coq proof-general nix-mode yasnippet-snippets yasnippet rainbow-delimiters all-the-icons powerline gruvbox-theme ligature treemacs orderless magit avy multiple-cursors which-key marginalia vertico olivetti org-bullets use-package)))
 
